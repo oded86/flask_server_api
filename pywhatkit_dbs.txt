@@ -1,0 +1,131 @@
+--------------------
+Date: 4:5:2021
+Time: 13:46
+Phone number: +972509095295
+Message: hello_Sagie
+--------------------
+Date: 4:5:2021
+Time: 13:56
+Phone number: +972509095295
+Message: hello_Sagie
+--------------------
+Date: 4:5:2021
+Time: 14:15
+Phone number: +972543067577
+Message: hello_Sagie
+--------------------
+Date: 4:5:2021
+Time: 14:17
+Phone number: +972543067577
+Message: hello_Sagie
+--------------------
+Date: 11:5:2021
+Time: 19:2
+Phone number: +9720542025665
+Message: hello_Sagie
+--------------------
+Date: 11:5:2021
+Time: 19:3
+Phone number: +9720542025665
+Message: hello_Sagie
+--------------------
+Date: 11:5:2021
+Time: 19:4
+Phone number: +9720542025665
+Message: hello_Sagie
+--------------------
+Date: 11:5:2021
+Time: 19:11
+Phone number: +9720542025665
+Message: hello_Sagie
+--------------------
+Date: 11:5:2021
+Time: 19:12
+Phone number: +9720542025665
+Message: hello_Sagie
+--------------------
+Date: 11:5:2021
+Time: 19:14
+Phone number: +9720542025665
+Message: hello_Sagie
+--------------------
+Date: 11:5:2021
+Time: 19:15
+Phone number: +9720542025665
+Message: hello_Sagie
+--------------------
+Date: 11:5:2021
+Time: 19:16
+Phone number: +9720542025665
+Message: hello_Sagie
+--------------------
+Date: 11:5:2021
+Time: 19:21
+Phone number: +9720542025665
+Message: hello_Sagie
+--------------------
+Date: 11:5:2021
+Time: 19:23
+Phone number: +9720542025665
+Message: hello_Sagie
+--------------------
+Date: 11:5:2021
+Time: 19:24
+Phone number: +9720542025665
+Message: hello_Sagie
+--------------------
+Date: 25:5:2021
+Time: 18:32
+Phone number: +9720542025665
+Message: hello_Sagie
+--------------------
+Date: 25:5:2021
+Time: 18:33
+Phone number: +9720542025665
+Message: היי מותק זה הבוט של שגיא לא להתייחס שמעתי שהתחתנת :)
+--------------------
+Date: 25:5:2021
+Time: 19:1
+Phone number: +9720522306872
+Message: a large fire in the sky 0.36255311965942383
+--------------------
+Date: 25:5:2021
+Time: 19:4
+Phone number: +9720522306872
+Message: a large fire in the sky 0.3625524640083313
+--------------------
+Date: 8:6:2021
+Time: 20:19
+Phone number: +972542025665
+Message: a large fire in the sky 0.3625524640083313
+--------------------
+Date: 8:6:2021
+Time: 20:48
+Phone number: +972542025665
+Message: a large fire in the sky 0.36255311965942383
+--------------------
+Date: 8:6:2021
+Time: 21:34
+Phone number: +972542025665
+Message: a large fire in the sky 0.36255311965942383
+--------------------
+Date: 8:6:2021
+Time: 21:37
+Phone number: +972542025665
+Message: a large fire in the sky 0.36255311965942383 the loaction http://www.mapquestapi.com/staticmap/v5/map?key=ck6rRKwcx0ceB54fCot5ga6m6Gb9lWIv&type=map&size=1200,700&locations=31.93198,34.83009|marker-sm-50318A-1&scalebar=true&zoom=14&rand=-66591669
+--------------------
+Date: 8:6:2021
+Time: 21:39
+Phone number: +972542025665
+Message: a large fire in the sky 0.3625524640083313 the loaction http://www.mapquestapi.com/staticmap/v5/map?key=ck6rRKwcx0ceB54fCot5ga6m6Gb9lWIv&type=map&size=1200,700&locations=31.93198,34.83009|marker-sm-50318A-1&scalebar=true&zoom=14&rand=-439879582
+--------------------
+Date: 16:6:2021
+Time: 19:24
+Phone number: +972542025665
+Message: a large fire in the sky 0.3625524640083313 the loaction http://www.mapquestapi.com/staticmap/v5/map?key=ck6rRKwcx0ceB54fCot5ga6m6Gb9lWIv&type=map&size=1200,700&locations=31.93198,34.83009|marker-sm-50318A-1&scalebar=true&zoom=14&rand=893656017
+--------------------
+Date: 16:6:2021
+Time: 19:28
+Phone number: +972542025665
+Message: a large fire in the sky 0.36255311965942383 the loaction http://www.mapquestapi.com/staticmap/v5/map?key=ck6rRKwcx0ceB54fCot5ga6m6Gb9lWIv&type=map&size=1200,700&locations=31.93198,34.83009|marker-sm-50318A-1&scalebar=true&zoom=14&rand=-1197426209
+--------------------
