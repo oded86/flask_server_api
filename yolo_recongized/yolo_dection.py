@@ -4,8 +4,8 @@ import cv2
 
 
 
-def yolo_dection_dogcat():
-	INPUT_FILE='fire.jpg'
+def yolo_dection_dogcat(INPUT_FILE='fire.jpg'):
+	
 	# INPUT_FILE='dogpoof.png'
 	# INPUT_FILE='dogcat.jpg'
 	OUTPUT_FILE='./yolo_recongized/predicted.jpg'
@@ -110,7 +110,12 @@ def yolo_dection_dogcat():
 
 	# show the output image
 	print(arrDogCat)
-	cv2.imwrite("example.png", image)
+	
+	try:
+		print('i in try')
+		cv2.imwrite("example.png", image)
+	except:
+		print('we have a problem with save the expample.png')
 	if 'dog' in arrDogCat:
 		if 'cat' in arrDogCat:
 			return 'we reconigzed dog and cat'

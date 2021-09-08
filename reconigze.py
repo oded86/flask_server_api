@@ -1,6 +1,6 @@
 
 from azure.cognitiveservices.vision.computervision import ComputerVisionClient
-
+import os
 from msrest.authentication import CognitiveServicesCredentials
 import cv2
 from PIL import Image
@@ -78,6 +78,23 @@ def reconigze_dogcat(img, adressF):
     adress = adressF
     print("statring reconigze_dogcat func..................")
     fire_text=yolo_dection_dogcat()
+    print(fire_text)
+    if 'not' in fire_text:
+        print('false')
+        return 'Hello , '+fire_text
+    else:
+        print('true')
+        # mapLocation = getMAp(adress)
+        sendMessageDogCat(fire_text+' '+str(percent),
+                        adress)
+        return fire_text+' '+str(percent)
+
+
+def reconigze_dogcatIn(img, adressF):
+    adress = adressF
+    print("statring reconigze_dogcatIn func..................")
+    path=os.path.join("../", img)
+    fire_text=yolo_dection_dogcat(path)
     print(fire_text)
     if 'not' in fire_text:
         print('false')
