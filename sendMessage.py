@@ -41,7 +41,7 @@ def sendMessageDogCat(message, adress):
     updater.bot.sendPhoto(
         chat_id='-519827084', photo='https://merrimackvalleytma.com/wp-content/uploads/megamenu_image_2-160812-143410-emergency-notification-image.jpg')
     updater.bot.sendMessage(chat_id='-519827084',
-                            text='the deatils: '+message+' in the loccation:')
+                            text='The details: the system has recognized a dog in the following location:')
     # updater.bot.sendMessage(chat_id='-519827084', text=adress)
     updater.bot.sendLocation(chat_id='-519827084',
                              latitude=float(adress[0]),
