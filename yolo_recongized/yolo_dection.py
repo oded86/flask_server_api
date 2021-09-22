@@ -1,11 +1,13 @@
 import numpy as np
 import time
 import cv2
+import requests
+from PIL import Image
 
 
 
 def yolo_dection_dogcat(INPUT_FILE='fire.jpg'):
-	
+	url = 'http://127.0.0.1:8020/runClassify'
 	# INPUT_FILE='dogpoof.png'
 	# INPUT_FILE='dogcat.jpg'
 	OUTPUT_FILE='./yolo_recongized/predicted.jpg'
@@ -14,6 +16,7 @@ def yolo_dection_dogcat(INPUT_FILE='fire.jpg'):
 	WEIGHTS_FILE='./yolo_recongized/yolov3.weights'
 	print('test_yolo_1')
 	arrDogCat=[]
+	recognizeDog=[]
 	CONFIDENCE_THRESHOLD=0.3
 
 	LABELS = open(LABELS_FILE).read().strip().split("\n")
@@ -94,7 +97,20 @@ def yolo_dection_dogcat(INPUT_FILE='fire.jpg'):
 		
 		# loop over the indexes we are keeping
 		for i in idxs.flatten():
-			
+			lableClass=LABELS[classIDs[i]]
+			if(lableClass=="dog"):
+				imageClassify = open(INPUT_FILE, 'rb')
+				my_img = {'image': imageClassify}
+				r = requests.post(url, files=my_img)
+				print(r.json()['score'])
+				if(int(r.json()['score'])>90):
+					lableClass=r.json()['name']
+					recognizeDog.append(lableClass)
+				else:
+					recognizeDog.append('Unknown')
+
+			else:
+				continue	
 			# extract the bounding box coordinates
 			(x, y) = (boxes[i][0], boxes[i][1])
 			(w, h) = (boxes[i][2], boxes[i][3])
@@ -102,7 +118,7 @@ def yolo_dection_dogcat(INPUT_FILE='fire.jpg'):
 			color = [int(c) for c in COLORS[classIDs[i]]]
 
 			cv2.rectangle(image, (x, y), (x + w, y + h), color, 2)
-			text = "{}: {:.4f}".format(LABELS[classIDs[i]], confidences[i])
+			text = "{}: {:.4f}".format(lableClass, confidences[i])
 			# print(LABELS[classIDs[i]])
 			arrDogCat.append(LABELS[classIDs[i]])
 			cv2.putText(image, text, (x, y - 5), cv2.FONT_HERSHEY_SIMPLEX,
@@ -110,17 +126,24 @@ def yolo_dection_dogcat(INPUT_FILE='fire.jpg'):
 
 	# show the output image
 	print(arrDogCat)
-	
+	print(recognizeDog)
 	try:
 		print('i in try')
 		cv2.imwrite("example.png", image)
 	except:
 		print('we have a problem with save the expample.png')
 	if 'dog' in arrDogCat:
-		if 'cat' in arrDogCat:
-			return 'we reconigzed dog and cat'
-		else: return 'we reconigzed dog'
-	elif 'cat' in arrDogCat:
-		return 'we reconigzed cat'
+		if(len(recognizeDog)>0):
+			text = "we reconigzed dog and this is the details:\n"
+			counter=1		
+			for name in recognizeDog:
+				text+="{}) name:{}\n".format(counter, name)
+				counter+=1
+			return text
+	# 	if 'cat' in arrDogCat:
+	# 		return 'we reconigzed dog and cat'
+	# 	else: return 'we reconigzed dog'
+	# elif 'cat' in arrDogCat:
+	# 	return 'we reconigzed cat'
 
 	return 'not reconigzed dog or cat'
