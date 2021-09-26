@@ -3,6 +3,9 @@ import json
 from downloadPic import download
 from upload_File_Firebase import getUrl
 from reconigze import reconigze_flooded, reconigze_fire, reconigze_dogcat, reconigze_dogcatIn
+import smtplib, ssl
+from email.mime.text import MIMEText
+
 app = Flask(__name__)
 
 # open server with flask api
@@ -92,6 +95,35 @@ def home4():
 def home5():
     return "trying :)"
 
+@app.route("/sendMail", methods=['POST'])
+def sendMAil():
+    data = request.stream.read()
+    objectData = json.loads(data)
+    mess = objectData["mess"]
+    sub = objectData["sub"]
+    mail = objectData["mail"]
+    name = objectData["name"]
+
+    port = 465  # For SSL
+    smtp_server = "smtp.gmail.com"
+    sender_email = "incontrol.sys.service@gmail.com"
+    receiver_email = ["alex.romm@incontrol-sys.com","royi.menashe@incontrol-sys.com"] # Enter receiver address
+    password = "Aa123456!"
+    msg = MIMEText('hi you hava i new message from the site'+
+    '\n \n the sub:'+sub+
+    '\n the name:'+name+
+    '\n the message:'+ mess +'\n'
+     '\n mail for callback :'+mail)
+    msg['Subject'] = sub
+    msg['From'] = "incontrol.sys.service@gmail.com"
+    msg['To'] = mail
+
+    context = ssl.create_default_context()
+    with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
+        server.login(sender_email, password)
+        server.sendmail(sender_email, receiver_email, msg.as_string())
+        return "succses"
+
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=8000)
+    app.run(host='127.0.0.1', port=8000)
