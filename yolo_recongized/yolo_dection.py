@@ -8,6 +8,7 @@ from PIL import Image
 
 def yolo_dection_dogcat(INPUT_FILE='fire.jpg'):
 	url = 'http://127.0.0.1:8020/runClassify'
+	url2 = 'http://127.0.0.1:8020/runClassifyPoop'
 	# INPUT_FILE='dogpoof.png'
 	# INPUT_FILE='dogcat.jpg'
 	OUTPUT_FILE='./yolo_recongized/predicted.jpg'
@@ -17,6 +18,7 @@ def yolo_dection_dogcat(INPUT_FILE='fire.jpg'):
 	print('test_yolo_1')
 	arrDogCat=[]
 	recognizeDog=[]
+	pooping=[]
 	CONFIDENCE_THRESHOLD=0.3
 
 	LABELS = open(LABELS_FILE).read().strip().split("\n")
@@ -102,10 +104,18 @@ def yolo_dection_dogcat(INPUT_FILE='fire.jpg'):
 				imageClassify = open(INPUT_FILE, 'rb')
 				my_img = {'image': imageClassify}
 				r = requests.post(url, files=my_img)
+				imageClassify = open(INPUT_FILE, 'rb')
+				my_img = {'image': imageClassify}
+				r2 = requests.post(url2, files=my_img)
+				print(r)
+				print(r2)
 				print(r.json()['score'])
 				if(int(r.json()['score'])>90):
 					lableClass=r.json()['name']
 					recognizeDog.append(lableClass)
+				if(int(r2.json()['score'])>90):
+					lableClass2=r2.json()['poopOrNot']
+					pooping.append(lableClass2)
 				else:
 					recognizeDog.append('Unknown')
 
@@ -134,7 +144,10 @@ def yolo_dection_dogcat(INPUT_FILE='fire.jpg'):
 		print('we have a problem with save the expample.png')
 	if 'dog' in arrDogCat:
 		if(len(recognizeDog)>0):
-			text = "we reconigzed dog and this is the details:\n"
+			text='We recognize dogs'
+			if len(pooping)>0:
+				text+="\nThe dog is {}".format(pooping[0])
+			text += "\n The names:\n"
 			counter=1		
 			for name in recognizeDog:
 				text+="{}) name:{}\n".format(counter, name)
