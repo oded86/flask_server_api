@@ -6,6 +6,12 @@ from reconigze import reconigze_flooded, reconigze_fire, reconigze_dogcat, recon
 import smtplib, ssl
 from email.mime.text import MIMEText
 
+
+from datetime import datetime
+
+now = datetime.now() # current date and time
+
+
 app = Flask(__name__)
 
 # open server with flask api
