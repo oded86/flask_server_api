@@ -113,11 +113,11 @@ def yolo_dection_dogcat(INPUT_FILE='fire.jpg'):
 				if(int(r.json()['score'])>90):
 					lableClass=r.json()['name']
 					recognizeDog.append(lableClass)
-				if(int(r2.json()['score'])>90):
-					lableClass2=r2.json()['poopOrNot']
-					pooping.append(lableClass2)
 				else:
 					recognizeDog.append('Unknown')
+			
+				lableClass2=r2.json()['poopOrNot']
+				pooping.append(lableClass2)
 
 			else:
 				continue	
