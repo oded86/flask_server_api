@@ -107,6 +107,8 @@ def yolo_dection_dogcat(INPUT_FILE='fire.jpg'):
 				imageClassify = open(INPUT_FILE, 'rb')
 				my_img = {'image': imageClassify}
 				r2 = requests.post(url2, files=my_img)
+				lableClass2=r2.json()['poopOrNot']
+				pooping.append(lableClass2)
 				print(r)
 				print(r2)
 				print(r.json()['score'])
@@ -115,9 +117,10 @@ def yolo_dection_dogcat(INPUT_FILE='fire.jpg'):
 					recognizeDog.append(lableClass)
 				else:
 					recognizeDog.append('Unknown')
-			
-				lableClass2=r2.json()['poopOrNot']
-				pooping.append(lableClass2)
+
+
+
+
 
 			else:
 				continue	
