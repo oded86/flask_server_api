@@ -13,9 +13,9 @@ def sendMessage(message, adress):
         token='1702864193:AAGj_J3ipAQ3wS0P1a2GEoEnnaAXOx9f9FY', use_context=True)
     updater.bot.sendPhoto(
         chat_id='-519827084', photo='https://merrimackvalleytma.com/wp-content/uploads/megamenu_image_2-160812-143410-emergency-notification-image.jpg')
-    # updater.bot.sendMessage(chat_id='-519827084',
-    #                         text='the deatils: '+message+' in the loccation:')
-    updater.bot.sendMessage(chat_id='-519827084', text=adress)
+    updater.bot.sendMessage(chat_id='-519827084',
+                            text='the deatils: '+message+' in the loccation:')
+    # updater.bot.sendMessage(chat_id='-519827084', text=adress)
     updater.bot.sendLocation(chat_id='-519827084',
                              latitude=32.0123111,
                              longitude=34.7947405)
