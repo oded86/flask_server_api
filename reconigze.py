@@ -96,7 +96,7 @@ def reconigze_dogcatIn(img, adressF):
     path=os.path.join("../", img)
     fire_text=yolo_dection_dogcat(path)
     print(fire_text)
-    if 'not' in fire_text:
+    if 'not reconigzed' in fire_text:
         print('false')
         return 'Hello , '+fire_text
     else:
