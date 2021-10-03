@@ -9,6 +9,7 @@ from PIL import Image
 def yolo_dection_dogcat(INPUT_FILE='fire.jpg'):
 	url = 'http://127.0.0.1:8020/runClassify'
 	url2 = 'http://127.0.0.1:8020/runClassifyPoop'
+	url3 = 'http://127.0.0.1:8020/vanilaOrNot'
 	# INPUT_FILE='dogpoof.png'
 	# INPUT_FILE='dogcat.jpg'
 	OUTPUT_FILE='./yolo_recongized/predicted.jpg'
@@ -104,17 +105,26 @@ def yolo_dection_dogcat(INPUT_FILE='fire.jpg'):
 				imageClassify = open(INPUT_FILE, 'rb')
 				my_img = {'image': imageClassify}
 				r = requests.post(url, files=my_img)
+
 				imageClassify = open(INPUT_FILE, 'rb')
 				my_img = {'image': imageClassify}
 				r2 = requests.post(url2, files=my_img)
+
+				imageClassify = open(INPUT_FILE, 'rb')
+				my_img = {'image': imageClassify}
+				r3 = requests.post(url3, files=my_img)
 				lableClass2=r2.json()['poopOrNot']
 				pooping.append(lableClass2)
 				print(r)
 				print(r2)
 				print(r.json()['score'])
-				if(int(r.json()['score'])>79):
-					lableClass=r.json()['name']
-					recognizeDog.append(lableClass)
+
+				if(r3.json()['vanilaOrNot']=='vanila'):
+					if(int(r.json()['score'])>85):
+						lableClass=r.json()['name']
+						recognizeDog.append(lableClass)
+					else:
+						recognizeDog.append('Unknown')
 				else:
 					recognizeDog.append('Unknown')
 
