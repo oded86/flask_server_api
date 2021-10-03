@@ -10,6 +10,7 @@ def yolo_dection_dogcat(INPUT_FILE='fire.jpg'):
 	url = 'http://127.0.0.1:8020/runClassify'
 	url2 = 'http://127.0.0.1:8020/runClassifyPoop'
 	url3 = 'http://127.0.0.1:8020/vanilaOrNot'
+	url4 = 'http://127.0.0.1:8020/poopOrNot'
 	# INPUT_FILE='dogpoof.png'
 	# INPUT_FILE='dogcat.jpg'
 	OUTPUT_FILE='./yolo_recongized/predicted.jpg'
@@ -113,15 +114,23 @@ def yolo_dection_dogcat(INPUT_FILE='fire.jpg'):
 				imageClassify = open(INPUT_FILE, 'rb')
 				my_img = {'image': imageClassify}
 				r3 = requests.post(url3, files=my_img)
+
+				imageClassify = open(INPUT_FILE, 'rb')
+				my_img = {'image': imageClassify}
+				r4 = requests.post(url4, files=my_img)
+
 				lableClass2=r2.json()['poopOrNot']
 				pooping.append(lableClass2)
 				print(r)
 				print(r2)
 				print(r.json()['score'])
+				print(r3.json()['vanilaOrNot'])
+				print(r4.json()['poopOrNot'])
 
-				if(r3.json()['vanilaOrNot']=='vanila'):
-					if(int(r.json()['score'])>85):
+				if(r3.json()['vanilaOrNot']=='vanila' or r4.json()['poopOrNot']=='poop'):
+					if(int(r.json()['score'])>60):
 						lableClass=r.json()['name']
+						print(r.json()['name'])
 						recognizeDog.append(lableClass)
 					else:
 						recognizeDog.append('Unknown')
