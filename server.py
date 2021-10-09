@@ -55,6 +55,7 @@ def home2():
 
 @app.route("/dogcat", methods=['POST'])
 def home3():
+    print('Api:dogcat-'+str(now))
     # get data from post parmeter
     data = request.stream.read()
     # change for json format
