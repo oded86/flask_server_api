@@ -78,6 +78,7 @@ def home3():
 
 @app.route("/dogcatIn", methods=['POST'])
 def home4():
+    print('Api:dogcatIn-'+str(now))
     # get data from post parmeter
     data = request.stream.read()
     # change for json format
@@ -104,6 +105,7 @@ def home5():
 
 @app.route("/sendMail", methods=['POST'])
 def sendMAil():
+    print('Api:sendMail-'+str(now))
     data = request.stream.read()
     objectData = json.loads(data)
     mess = objectData["mess"]
