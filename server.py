@@ -5,7 +5,7 @@ from upload_File_Firebase import getUrl
 from reconigze import reconigze_flooded, reconigze_fire, reconigze_dogcat, reconigze_dogcatIn
 import smtplib, ssl
 from email.mime.text import MIMEText
-
+from senderMail import sendMail
 
 from datetime import datetime
 
@@ -102,9 +102,28 @@ def home4():
 @app.route("/trying", methods=['GET'])
 def home5():
     return "trying :)"
-
 @app.route("/sendMail", methods=['POST'])
 def sendMAil():
+    print('Api:sendMail-'+str(now))
+    data = request.stream.read()
+    objectData = json.loads(data)
+    mess = objectData["mess"]
+    sub = objectData["sub"]
+    mail = objectData["mail"]
+    name = objectData["name"]
+    receiver_email_1 = "alex.romm@incontrol-sys.com"
+    receiver_email_2 = "royi.menashe@incontrol-sys.com"
+    # receiver_email = ["alex.romm@incontrol-sys.com","royi.menashe@incontrol-sys.com"]
+    
+    sendMail(mail,name)
+    sendMail(receiver_email_1,"Alex",sub,mess,name)
+    sendMail(receiver_email_2,"Roi",sub,mess,name)
+    return 'succses'
+
+
+
+@app.route("/sendMail1", methods=['POST'])
+def sendMAil1():
     print('Api:sendMail-'+str(now))
     data = request.stream.read()
     objectData = json.loads(data)
