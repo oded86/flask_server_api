@@ -94,7 +94,10 @@ def reconigze_dogcatIn(img, adressF):
     adress = adressF
     print("statring reconigze_dogcatIn func..................")
     path=os.path.join("../", img)
-    fire_text=yolo_dection_dogcat(path)
+    if os.path.exists(path):
+        fire_text=yolo_dection_dogcat(path)
+    else:
+        raise "the path of img not exist"
     print(fire_text)
     if 'not reconigzed' in fire_text:
         print('false')
