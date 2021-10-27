@@ -103,21 +103,22 @@ def yolo_dection_dogcat(INPUT_FILE='fire.jpg'):
 		for i in idxs.flatten():
 			lableClass=LABELS[classIDs[i]]
 			if(lableClass=="dog"):
-				imageClassify = open(INPUT_FILE, 'rb')
-				my_img = {'image': imageClassify}
-				r = requests.post(url, files=my_img)
+				with open(INPUT_FILE, 'rb') as imageClassify:
+				# imageClassify = open(INPUT_FILE, 'rb')
+					my_img = {'image': imageClassify}
+					r = requests.post(url, files=my_img)
 
-				imageClassify = open(INPUT_FILE, 'rb')
-				my_img = {'image': imageClassify}
-				r2 = requests.post(url2, files=my_img)
+				with open(INPUT_FILE, 'rb') as imageClassify:
+					my_img = {'image': imageClassify}
+					r2 = requests.post(url2, files=my_img)
 
-				imageClassify = open(INPUT_FILE, 'rb')
-				my_img = {'image': imageClassify}
-				r3 = requests.post(url3, files=my_img)
+				with open(INPUT_FILE, 'rb') as imageClassify:
+					my_img = {'image': imageClassify}
+					r3 = requests.post(url3, files=my_img)
 
-				imageClassify = open(INPUT_FILE, 'rb')
-				my_img = {'image': imageClassify}
-				r4 = requests.post(url4, files=my_img)
+				with open(INPUT_FILE, 'rb') as imageClassify:
+					my_img = {'image': imageClassify}
+					r4 = requests.post(url4, files=my_img)
 
 				lableClass2=r2.json()['poopOrNot']
 				pooping.append(lableClass2)

@@ -7,7 +7,7 @@ from imutils.video import VideoStream
 
 
 
-INPUT_FILE='video (1).mp4'
+INPUT_FILE='video.mp4'
 OUTPUT_FILE='output.avi'
 LABELS_FILE='coco.names'
 CONFIG_FILE='yolov3.cfg'
@@ -43,15 +43,15 @@ while True:
 	cnt+=1
 	print ("Frame number", cnt)
 	try:
-		(grabbed, image) = vs.read()
+		(grabbed, image) = vs.read()	
 	except:
 		break
 	blob = cv2.dnn.blobFromImage(image, 1 / 255.0, (416, 416),
-		swapRB=True, crop=False)
+	swapRB=True, crop=False)
 	net.setInput(blob)
 	if W is None or H is None:
 		(H, W) = image.shape[:2]
-	layerOutputs = net.forward(ln)
+		layerOutputs = net.forward(ln)
 
 
 
@@ -104,23 +104,27 @@ while True:
 	if len(idxs) > 0:
 		# loop over the indexes we are keeping
 		for i in idxs.flatten():
+			lableClass=LABELS[classIDs[i]]
+			if lableClass=="person":
+				print('hi')
 			# extract the bounding box coordinates
-			(x, y) = (boxes[i][0], boxes[i][1])
-			(w, h) = (boxes[i][2], boxes[i][3])
+				(x, y) = (boxes[i][0], boxes[i][1])
+				(w, h) = (boxes[i][2], boxes[i][3])
 
-			color = [int(c) for c in COLORS[classIDs[i]]]
+				color = [int(c) for c in COLORS[classIDs[i]]]
 
-			cv2.rectangle(image, (x, y), (x + w, y + h), color, 2)
-			text = "{}: {:.4f}".format(LABELS[classIDs[i]], confidences[i])
-			cv2.putText(image, text, (x, y - 5), cv2.FONT_HERSHEY_SIMPLEX,
-				0.5, color, 2)
+				cv2.rectangle(image, (x, y), (x + w, y + h), color, 2)
+				text = "{}: {:.4f}".format(LABELS[classIDs[i]], confidences[i])
+				cv2.putText(image, text, (x, y - 5), cv2.FONT_HERSHEY_SIMPLEX,
+					0.5, color, 2)
 
 	# show the output image
+	# cv2.imshow("output", image)
 	cv2.imshow("output", cv2.resize(image,(800, 600)))
 	writer.write(cv2.resize(image,(800, 600)))
 	fps.update()
-	key = cv2.waitKey(1) & 0xFF
-	if key == ord("q"):
+	
+	if cv2.waitKey(25) & 0xFF == ord('q'):
 		break
 
 fps.stop()

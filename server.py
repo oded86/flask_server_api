@@ -53,7 +53,7 @@ def home2():
     return reconigze_flooded(result_getUrl[0], result_getUrl[1])
 
 
-@app.route("/dogcat", methods=['POST'])
+@app.route("/dogcatBackUp", methods=['POST'])
 def home3():
     print('Api:dogcat-'+str(now))
     # get data from post parmeter
@@ -122,7 +122,7 @@ def sendMAil():
 
 
 
-@app.route("/sendMail1", methods=['POST'])
+@app.route("/sendMailBackUp", methods=['POST'])
 def sendMAil1():
     print('Api:sendMail-'+str(now))
     data = request.stream.read()
@@ -155,3 +155,4 @@ def sendMAil1():
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=8000)
+    # app.run(host='127.0.0.1', port=8000,debug=True)
