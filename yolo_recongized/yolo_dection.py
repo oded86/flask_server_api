@@ -7,10 +7,10 @@ from PIL import Image
 
 
 def yolo_dection_dogcat(INPUT_FILE='fire.jpg'):
-	url = 'http://127.0.0.1:8020/runClassify'
-	url2 = 'http://127.0.0.1:8020/runClassifyPoop'
-	url3 = 'http://127.0.0.1:8020/vanilaOrNot'
-	url4 = 'http://127.0.0.1:8020/poopOrNot'
+	url = 'https://incontrol-sys.com/image_api/runClassify'
+	url2 = 'https://incontrol-sys.com/image_api/runClassifyPoop'
+	url3 = 'https://incontrol-sys.com/image_api/vanilaOrNot'
+	url4 = 'https://incontrol-sys.com/image_api/poopOrNot'
 	# INPUT_FILE='dogpoof.png'
 	# INPUT_FILE='dogcat.jpg'
 	OUTPUT_FILE='./yolo_recongized/predicted.jpg'
