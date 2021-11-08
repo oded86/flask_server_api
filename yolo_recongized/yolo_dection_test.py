@@ -6,17 +6,22 @@ from PIL import Image
 
 
 
-def yolo_dection_dogcat(INPUT_FILE='fire.jpg'):
-	url = 'https://incontrol-sys.com/image_api/runClassify'
-	url2 = 'https://incontrol-sys.com/image_api/runClassifyPoop'
-	url3 = 'https://incontrol-sys.com/image_api/vanilaOrNot'
-	url4 = 'https://incontrol-sys.com/image_api/poopOrNot'
+def yolo_dection_dogcat_test(INPUT_FILE='fire.jpg'):
+	url = 'http://127.0.0.1:8020/image_api/runClassify'
+	url2 = 'http://127.0.0.1:8020/image_api/runClassifyPoop'
+	url3 = 'http://127.0.0.1:8020/image_api/vanilaOrNot'
+	url4 = 'http://127.0.0.1:8020/image_api/poopOrNot'
+	# url = 'https://incontrol-sys.com/image_api/runClassify'
+	# url2 = 'https://incontrol-sys.com/image_api/runClassifyPoop'
+	# url3 = 'https://incontrol-sys.com/image_api/vanilaOrNot'
+	# url4 = 'https://incontrol-sys.com/image_api/poopOrNot'
 	# INPUT_FILE='dogpoof.png'
 	# INPUT_FILE='dogcat.jpg'
 	OUTPUT_FILE='./yolo_recongized/predicted.jpg'
 	LABELS_FILE='./yolo_recongized/coco.names'
 	CONFIG_FILE='./yolo_recongized/yolov3.cfg'
 	WEIGHTS_FILE='./yolo_recongized/yolov3.weights'
+	numberDogs=0
 	print('test_yolo_1')
 	arrDogCat=[]
 	recognizeDog=[]
@@ -97,26 +102,31 @@ def yolo_dection_dogcat(INPUT_FILE='fire.jpg'):
 		CONFIDENCE_THRESHOLD)
 
 	# ensure at least one detection exists
+
 	if len(idxs) > 0:
-		
 		# loop over the indexes we are keeping
 		for i in idxs.flatten():
 			lableClass=LABELS[classIDs[i]]
 			if(lableClass=="dog"):
-				with open(INPUT_FILE, 'rb') as imageClassify:
+				(x, y) = (boxes[i][0], boxes[i][1])
+				(w, h) = (boxes[i][2], boxes[i][3])
+				crop_img = image[y:y+h, x:x+w]
+				name="crops/crop"+str(numberDogs)+".png"
+				cv2.imwrite(name, crop_img)
+				with open(name, 'rb') as imageClassify:
 				# imageClassify = open(INPUT_FILE, 'rb')
 					my_img = {'image': imageClassify}
 					r = requests.post(url, files=my_img)
 
-				with open(INPUT_FILE, 'rb') as imageClassify:
+				with open(name, 'rb') as imageClassify:
 					my_img = {'image': imageClassify}
 					r2 = requests.post(url2, files=my_img)
 
-				with open(INPUT_FILE, 'rb') as imageClassify:
+				with open(name, 'rb') as imageClassify:
 					my_img = {'image': imageClassify}
 					r3 = requests.post(url3, files=my_img)
 
-				with open(INPUT_FILE, 'rb') as imageClassify:
+				with open(name, 'rb') as imageClassify:
 					my_img = {'image': imageClassify}
 					r4 = requests.post(url4, files=my_img)
 
@@ -127,7 +137,8 @@ def yolo_dection_dogcat(INPUT_FILE='fire.jpg'):
 				print(r.json()['score'])
 				print(r3.json()['vanilaOrNot'])
 				print(r4.json()['poopOrNot'])
-
+				numberDogs=numberDogs+1
+				print(numberDogs)
 				if(r3.json()['vanilaOrNot']=='vanila' or r4.json()['poopOrNot']=='poop'):
 					if(int(r.json()['score'])>60):
 						lableClass=r.json()['name']
@@ -137,29 +148,23 @@ def yolo_dection_dogcat(INPUT_FILE='fire.jpg'):
 						recognizeDog.append('Unknown')
 				else:
 					recognizeDog.append('Unknown')
-
-
-
-
+				
 
 			else:
 				continue	
 			# extract the bounding box coordinates
-			(x, y) = (boxes[i][0], boxes[i][1])
-			(w, h) = (boxes[i][2], boxes[i][3])
 
 			color = [int(c) for c in COLORS[classIDs[i]]]
-
 			cv2.rectangle(image, (x, y), (x + w, y + h), color, 2)
 			text = "{}: {:.4f}".format(lableClass, confidences[i])
 			# print(LABELS[classIDs[i]])
 			arrDogCat.append(LABELS[classIDs[i]])
 			cv2.putText(image, text, (x, y - 5), cv2.FONT_HERSHEY_SIMPLEX,
 				0.5, color, 2)
-
 	# show the output image
 	print(arrDogCat)
 	print(recognizeDog)
+	numberDogs=0
 	try:
 		print('i in try')
 		cv2.imwrite("example.png", image)
@@ -168,12 +173,12 @@ def yolo_dection_dogcat(INPUT_FILE='fire.jpg'):
 	if 'dog' in arrDogCat:
 		if(len(recognizeDog)>0):
 			text='We recognize dogs'
-			if len(pooping)>0:
-				text+="\nThe dog is {}".format(pooping[0])
-			text += "\n The names:\n"
+			# if len(pooping)>0:
+			# 	text+="\nThe dog is {}".format(pooping[0])
+			text += "\n The results:\n"
 			counter=1		
 			for name in recognizeDog:
-				text+="{}) name:{}\n".format(counter, name)
+				text+="{}) name:{} , behavior: {}\n".format(counter, name,pooping[counter-1])
 				counter+=1
 			return text
 	# 	if 'cat' in arrDogCat:

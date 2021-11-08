@@ -7,6 +7,7 @@ from PIL import Image
 from sendMessage import sendMessage,sendMessageDogCat
 from urlMap import getMAp
 from yolo_recongized.yolo_dection import yolo_dection_dogcat
+from yolo_recongized.yolo_dection_test import yolo_dection_dogcat_test
 fire = 'https://instaface.co.il/wp-content/uploads/2020/03/%D7%9C%D7%94%D7%A4%D7%95%D7%9A-%D7%AA%D7%9E%D7%95%D7%A0%D7%94-%D7%9C%D7%A6%D7%99%D7%95%D7%A8-7-1.png'
 key = "7b26cb22cdf14b07b35af19d57471f5f"
 endpoint = "https://sagiekadomain.cognitiveservices.azure.com/"
@@ -95,7 +96,8 @@ def reconigze_dogcatIn(img, adressF):
     print("statring reconigze_dogcatIn func..................")
     path=os.path.join("../", img)
     if os.path.exists(path):
-        fire_text=yolo_dection_dogcat(path)
+        fire_text=yolo_dection_dogcat_test(path)
+        # fire_text=yolo_dection_dogcat(path)
     else:
         raise "the path of img not exist"
     print(fire_text)
