@@ -7,14 +7,14 @@ from PIL import Image
 
 
 def yolo_dection_dogcat_test(INPUT_FILE='fire.jpg'):
-	url = 'http://127.0.0.1:8020/image_api/runClassify'
-	url2 = 'http://127.0.0.1:8020/image_api/runClassifyPoop'
-	url3 = 'http://127.0.0.1:8020/image_api/vanilaOrNot'
-	url4 = 'http://127.0.0.1:8020/image_api/poopOrNot'
-	# url = 'https://incontrol-sys.com/image_api/runClassify'
-	# url2 = 'https://incontrol-sys.com/image_api/runClassifyPoop'
-	# url3 = 'https://incontrol-sys.com/image_api/vanilaOrNot'
-	# url4 = 'https://incontrol-sys.com/image_api/poopOrNot'
+	# url = 'http://127.0.0.1:8020/image_api/runClassify'
+	# url2 = 'http://127.0.0.1:8020/image_api/runClassifyPoop'
+	# url3 = 'http://127.0.0.1:8020/image_api/vanilaOrNot'
+	# url4 = 'http://127.0.0.1:8020/image_api/poopOrNot'
+	url = 'http://157.230.91.241:8020/runClassify'
+	url2 = 'http://157.230.91.241:8020/runClassifyPoop'
+	url3 = 'http://157.230.91.241:8020/vanilaOrNot'
+	url4 = 'http://157.230.91.241:8020/poopOrNot'
 	# INPUT_FILE='dogpoof.png'
 	# INPUT_FILE='dogcat.jpg'
 	OUTPUT_FILE='./yolo_recongized/predicted.jpg'
@@ -112,7 +112,10 @@ def yolo_dection_dogcat_test(INPUT_FILE='fire.jpg'):
 				(w, h) = (boxes[i][2], boxes[i][3])
 				crop_img = image[y:y+h, x:x+w]
 				name="crops/crop"+str(numberDogs)+".png"
-				cv2.imwrite(name, crop_img)
+				try:
+					cv2.imwrite(name, crop_img)
+				except:
+					return "we have a problem with crop image"
 				with open(name, 'rb') as imageClassify:
 				# imageClassify = open(INPUT_FILE, 'rb')
 					my_img = {'image': imageClassify}
